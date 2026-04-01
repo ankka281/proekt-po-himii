@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Химия ароматов | Проект 9 класса</title>
+    <!-- Подключение шрифтов и Font Awesome для иконок -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2f5 100%);
+            color: #1a2a3f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Современный научный стиль */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 2rem;
+        }
+
+        /* Шапка */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(46, 125, 150, 0.12);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: #1e6f5c;
+            border: 1px solid rgba(30, 111, 92, 0.25);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1f4e3c, #2c7a6e, #3a8c7c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #2c5368;
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 1px solid #cbdde6;
+            padding-top: 1rem;
+        }
+
+        .author-line {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            color: #527a7a;
+            background: #ffffffcc;
+            display: inline-block;
+            padding: 0.3rem 1.5rem;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* Общие факты — карточки в научном стиле */
+        .section-title {
+            font-size: 1.9rem;
+            font-weight: 600;
+            margin: 2rem 0 1.5rem 0;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #2c7a6e, #b0d9cd);
+            border-radius: 3px;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        .fact-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(8px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 20, 10, 0.08);
+            border: 1px solid rgba(46, 125, 90, 0.2);
+            transition: all 0.25s ease;
+        }
+        .fact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 28px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #8fc1b0;
+        }
+        .fact-icon {
+            font-size: 2.2rem;
+            color: #2c7a6e;
+            margin-bottom: 1rem;
+        }
+        .fact-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .fact-card p {
+            color: #2a4b5e;
+            font-size: 0.95rem;
+        }
+
+        /* Секция флаконов */
+        .flacons-section {
+            margin: 3rem 0 2rem;
+        }
+        .flacon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Карточка флакона (интерактивная) */
+        .flacon-card {
+            flex: 1;
+            min-width: 260px;
+            max-width: 320px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            border-radius: 2.5rem;
+            padding: 1.8rem 1.2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: default;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .flacon-card:hover {
+            transform: translateY(-10px);
+            background: white;
+            border-color: #bcd9d0;
+            box-shadow: 0 25px 35px -12px rgba(28, 85, 70, 0.25);
+        }
+
+        /* Стилизованный флакон (иконка + стекло) */
+        .flacon-icon {
+            font-size: 5rem;
+            color: #3a8c7c;
+            filter: drop-shadow(2px 6px 12px rgba(0,0,0,0.1));
+            margin-bottom: 0.5rem;
+            transition: transform 0.2s;
+        }
+        .flacon-card:hover .flacon-icon {
+            transform: scale(1.02);
+        }
+
+        .flacon-name {
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin: 0.5rem 0 0.25rem;
+            background: linear-gradient(120deg, #1f5e4c, #2f8572);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .flacon-sub {
+            font-size: 0.8rem;
+            color: #5e8a7c;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px dashed #cbd5e1;
+            display: inline-block;
+            padding-bottom: 4px;
+        }
+
+        /* Блок состава — появляется при наведении */
+        .composition-block {
+            background: #f0f7f4;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: left;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.3s ease, max-height 0.5s ease, margin 0.2s;
+            border-left: 3px solid #2c7a6e;
+            box-shadow: inset 0 1px 2px #0001, 0 2px 5px #0001;
+        }
+
+        .flacon-card:hover .composition-block {
+            opacity: 1;
+            max-height: 500px;      /* достаточно для содержимого */
+            margin-top: 1.2rem;
+        }
+
+        .composition-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #1e5a4a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.7rem;
+        }
+        .composition-title i {
+            font-size: 1rem;
+        }
+        .compound-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .compound-list li {
+            font-size: 0.85rem;
+            margin-bottom: 0.6rem;
+            border-bottom: 1px solid #cfe3db;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .chem-name {
+            font-weight: 600;
+            color: #135e4b;
+            font-family: monospace;
+            background: #e9f3ef;
+            padding: 0.1rem 0.4rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+        .chem-desc {
+            color: #2d4f5c;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+        .small-note {
+            font-size: 0.7rem;
+            color: #5e7b6e;
+            margin-top: 0.5rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Подвал */
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            padding: 2rem 1rem;
+            border-top: 1px solid rgba(60, 100, 80, 0.2);
+            font-size: 0.85rem;
+            color: #527a6e;
+        }
+
+        @media (max-width: 780px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 2.3rem;
+            }
+            .flacon-grid {
+                gap: 1.5rem;
+            }
+            .flacon-card {
+                min-width: 260px;
+            }
+        }
+
+        /* небольшие анимации */
+        .highlight {
+            background: linear-gradient(120deg, #e0f0ea 0%, #f4fbf8 100%);
+        }
+        button, .flacon-card {
+            user-select: none;
+        }
+        .info-note {
+            background: #e7f0ed;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            text-align: center;
+            color: #2a6454;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Заголовок с указанием авторства -->
+    <div class="hero">
+        <div class="badge">
+            <i class="fas fa-flask"></i>  ХИМИЯ ВОКРУГ НАС
+        </div>
+        <h1>Химия духов: <br>ароматы глазами молекулы</h1>
+        <div class="subhead">
+            Проектно-исследовательская работа учеников 9 класса <br> 
+            «От летучих соединений до парфюмерного искусства»
+        </div>
+        <div class="author-line">
+            <i class="fas fa-user-graduate"></i>  Авторы: Андрей В., София М., Дмитрий К. | 9 «А» | Руководитель: учитель химии Е.В. Громова
+        </div>
+    </div>
+
+    <!-- Общие факты о химии ароматов -->
+    <div>
+        <div class="section-title">🧪 Химическая палитра ароматов</div>
+        <div class="facts-grid">
+            <div class="fact-card">
+                <div class="fact-icon"><i class="fas fa-atom"></i></div>
+                <h3>Молекулы — носители запаха</h3>
+                <p>Летучие органические соединения (терпены, альдегиды, эфиры) достигают рецепторов носа. Форма молекулы и её функциональные группы определяют, почувствуем мы розу, ваниль или морской бриз.</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Ноты: верхние, средние, базовые</h3>
+                <p>Химия помогает создавать сложные пирамиды: цитрусовые (лимонен) быстро испаряются, цветочные сердца (гераниол) раскрываются через минуты, а тяжёлые смолы (ванилин, кумарин) фиксируют аромат на часах.</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon"><i class="fas fa-vial"></i></div>
+                <h3>Синтез vs природа</h3>
+                <p>Многие душистые вещества сегодня получают в лабораториях: например, ванилин из лигнина или гваякола. Это позволяет сохранять экологию и создавать уникальные, устойчивые оттенки.</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon"><i class="fas fa-microscope"></i></div>
+                <h3>Обоняние — молекулярный ключ</h3>
+                <p>Теория стереохимии утверждает: форма молекулы подходит к рецептору, как ключ к замку. Даже зеркальные изомеры могут пахнуть по-разному — (R)-лимонен пахнет апельсином, а (S)-лимонен — лимоном.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Интерактивная часть: 3 флакона с появлением состава при наведении -->
+    <div class="flacons-section">
+        <div class="section-title">🔬 Три аромата — три химических профиля</div>
+        <p style="margin-bottom: 1rem; color: #2d5a4c;"><i class="fas fa-mouse-pointer"></i> Наведите курсор на любой флакон, чтобы увидеть химический состав и ключевые молекулы.</p>
+        
+        <div class="flacon-grid">
+            <!-- Флакон 1: Цветочная симфония (Роза + жасмин) -->
+            <div class="flacon-card">
+                <div class="flacon-icon">
+                    <i class="fas fa-spa"></i> <!-- иконка, напоминающая цветок/флакон -->
+                </div>
+                <div class="flacon-name">Rose Garden</div>
+                <div class="flacon-sub">цветочная элегантность</div>
+                <!-- Блок состава, видимый при ховере -->
+                <div class="composition-block">
+                    <div class="composition-title">
+                        <i class="fas fa-dna"></i> Химический состав
+                    </div>
+                    <ul class="compound-list">
+                        <li><span class="chem-name">Цитронеллол</span> <span class="chem-desc">— основной компонент розового масла, нежный цветочный оттенок с лёгкой свежестью.</span></li>
+                        <li><span class="chem-name">Гераниол</span> <span class="chem-desc">— сладкий, розово-фруктовый аромат, усиливает стойкость.</span></li>
+                        <li><span class="chem-name">Фенилэтиловый спирт</span> <span class="chem-desc">— медово-розовый тон, характерен для натуральной розы.</span></li>
+                        <li><span class="chem-name">β-Ионон</span> <span class="chem-desc">— фиалковый подтон, создаёт объём и бархатистость.</span></li>
+                    </ul>
+                    <div class="small-note">💧 Эфирное масло розы содержит более 300 компонентов, эти четыре — ключевые.</div>
+                </div>
+            </div>
+
+            <!-- Флакон 2: Цитрусовый бриз (лимон, апельсин, бергамот) -->
+            <div class="flacon-card">
+                <div class="flacon-icon">
+                    <i class="fas fa-sun"></i> <!-- солнце / цитрус -->
+                </div>
+                <div class="flacon-name">Citrus Wave</div>
+                <div class="flacon-sub">энергия и свежесть</div>
+                <div class="composition-block">
+                    <div class="composition-title">
+                        <i class="fas fa-dna"></i> Химический состав
+                    </div>
+                    <ul class="compound-list">
+                        <li><span class="chem-name">Лимонен (R-форма)</span> <span class="chem-desc">— основной компонент цитрусовых, апельсиновый, радостный аромат. Летуч, открывает композицию.</span></li>
+                        <li><span class="chem-name">Цитраль</span> <span class="chem-desc">— мощный лимонный запах, обладает антисептическими свойствами, часто в лимонной и вербеновой ноте.</span></li>
+                        <li><span class="chem-name">Линалил ацетат</span> <span class="chem-desc">— цветочно-цитрусовый оттенок (из бергамота и лаванды), придаёт свежесть.</span></li>
+                        <li><span class="chem-name">Нерол</span> <span class="chem-desc">— сладкий, нежный цитрус с цветочными нюансами, содержится в неролиевом масле.</span></li>
+                    </ul>
+                    <div class="small-note">🍊 Лимонен составляет до 90% эфирного масла апельсина — яркий пример терпена.</div>
+                </div>
+            </div>
+
+            <!-- Флакон 3: Древесная тайна (кедр + пачули + ваниль) -->
+            <div class="flacon-card">
+                <div class="flacon-icon">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <div class="flacon-name">Woody Essence</div>
+                <div class="flacon-sub">глубина и теплота</div>
+                <div class="composition-block">
+                    <div class="composition-title">
+                        <i class="fas fa-dna"></i> Химический состав
+                    </div>
+                    <ul class="compound-list">
+                        <li><span class="chem-name">Изоборнилацетат</span> <span class="chem-desc">— хвойно-древесный, смолистый аккорд, основа для «лесных» духов.</span></li>
+                        <li><span class="chem-name">Пачулиевый спирт (пачулол)</span> <span class="chem-desc">— землистый, влажный древесный оттенок, придаёт долговечность.</span></li>
+                        <li><span class="chem-name">Ванилин</span> <span class="chem-desc">— сладкая ванильная нота, смягчает древесные акценты.</span></li>
+                        <li><span class="chem-name">Кумарин</span> <span class="chem-desc">— запах свежего сена с тонким миндальным оттенком, фиксатор.</span></li>
+                    </ul>
+                    <div class="small-note">🌲 Пачули используют как базу в восточных композициях — его молекулы медленно испаряются.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Дополнительный пояснительный блок -->
+        <div class="info-note">
+            <i class="fas fa-microscope"></i>  Научный факт: душистые вещества взаимодействуют с обонятельными рецепторами благодаря молекулярной структуре. 
+            Например, замена атома водорода на гидроксильную группу может превратить запах сосны в запах лимона!
+        </div>
+    </div>
+
+    <!-- Дополнительный раздел: химическая формула ароматов (современная наука) -->
+    <div style="margin-top: 2.5rem;">
+        <div class="section-title">📖 Как химики создают духи?</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.8rem; margin-top: 1rem;">
+            <div style="flex: 1; background: #ffffffcc; border-radius: 1.5rem; padding: 1.5rem;">
+                <i class="fas fa-chalkboard-user" style="font-size: 2rem; color: #2c7a6e;"></i>
+                <h3 style="margin: 0.5rem 0 0.8rem;">GC-MS анализ</h3>
+                <p style="font-size: 0.9rem;">Газовая хроматография и масс-спектрометрия позволяют разложить любой аромат на молекулярные компоненты. Ученые определяют точные концентрации лимонена, линалилацетата и сотен других соединений.</p>
+            </div>
+            <div style="flex: 1; background: #ffffffcc; border-radius: 1.5rem; padding: 1.5rem;">
+                <i class="fas fa-flask" style="font-size: 2rem; color: #2c7a6e;"></i>
+                <h3 style="margin: 0.5rem 0 0.8rem;">Полусинтез из природного сырья</h3>
+                <p style="font-size: 0.9rem;">Из скипидара (содержит α-пинен) получают камфору, линалил, терпинеол. Так рождаются устойчивые, доступные ингредиенты для духов.</p>
+            </div>
+            <div style="flex: 1; background: #ffffffcc; border-radius: 1.5rem; padding: 1.5rem;">
+                <i class="fas fa-chart-simple" style="font-size: 2rem; color: #2c7a6e;"></i>
+                <h3 style="margin: 0.5rem 0 0.8rem;">Молекулярное моделирование</h3>
+                <p style="font-size: 0.9rem;">Современные лаборатории используют 3D-модели рецепторов, чтобы предсказать, какой аромат даст новая молекула — так создаются уникальные "ноты".</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Заключительная мысль от команды 9 класса -->
+    <div style="background: linear-gradient(110deg, #e2f0ea 0%, #ffffff 100%); border-radius: 2rem; padding: 1.8rem; margin: 2.5rem 0 1rem;">
+        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <div><i class="fas fa-quote-left" style="font-size: 2.5rem; color: #388e7a;"></i></div>
+            <div><strong style="font-size: 1.2rem;">Химия — это не просто формулы, это искусство чувствовать.</strong><br>
+            В ходе проекта мы изучили, как структурные изомеры меняют восприятие запаха, научились выделять эфирные масла и поняли: за каждым любимым ароматом стоит сложный химический ансамбль. Каждый флакон — это симфония молекул!</div>
+        </div>
+    </div>
+
+    <footer>
+        <i class="fas fa-leaf"></i> Проектная работа по химии 2025 • 9 класс, МБОУ «Гимназия №7»<br>
+        Исследование выполнено в рамках недели науки. Все данные основаны на научно-популярных источниках и учебных материалах.
+    </footer>
+</div>
+</body>
+</html>
